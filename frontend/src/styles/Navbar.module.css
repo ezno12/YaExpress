@@ -1,0 +1,150 @@
+/* Menu CSS*/
+.container {
+    height: 50px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 88;
+  }
+  
+  .item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+    gap: 4rem;
+  }
+  
+  
+  .callButton {
+    background-color: white;
+    border-radius: 50%;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .texts {
+    margin-left: 20px;
+    color: black;
+  }
+  
+  .text:first-child {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  
+  .text:last-child {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .list {
+    padding: 0;
+    display:flex;
+    align-items: center;
+    list-style: none;
+    color: white;
+  }
+  
+  .listItem {
+    margin: 20px;
+    font-weight: 500;
+  }
+  
+  .cart{
+      position: relative;
+  }
+  .btn{
+    display: none;
+  }
+  .counter{
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: white;
+      padding: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #ffce00;
+  }
+  
+  @media screen and (max-width:1095px) {
+    .item:nth-child(2) {
+      display: none;
+    }
+    .item:nth-child(1) {
+      flex: 3;
+    }
+    
+    .menu {
+      width: 25px;
+      height: 25px;
+      display: block;
+      border: none;
+      padding: 0px;
+      margin: 20px;
+      cursor: pointer;
+      background: linear-gradient(
+        to bottom, 
+        black, black 20%, 
+        #ebf8e2 20%, #ebf8e2 40%, 
+        black 40%, black 60%, 
+        #ebf8e2 60%, #ebf8e2 80%, 
+        black 80%, black 100%
+      );
+  }                       
+    .btn{
+      display: contents;
+      width: auto;
+      text-align: center;
+      background-color: #ffce00;
+      color: rgb(0, 0, 0);
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 500;
+    }    
+    .item {
+      left: 30px;
+      position: absolute;
+      display: inline-block;
+    }
+    
+    .list {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      overflow: scroll;
+      height: 2000%; 
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .list .listItem {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .list .listItem:hover {background-color: #f1f1f1}
+    
+    .item:hover .list {
+      display: block;
+    }
+    
+    .item:hover .btn{
+      background-color: #ffce00;
+    }
+  }
+  
