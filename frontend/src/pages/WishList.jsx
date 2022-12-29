@@ -184,7 +184,7 @@ const Wishlist = () => {
                 </Details>
               </ProductDetail>
               <PriceDetail>
-              <Favorite style={{cursor:"pointer",color:"teal"}} onClick={()=>dispatch(deleteProd(product)) && setProducts(prods.filter(product => product._id !== prods[index]._id))}/>
+              <Favorite style={{cursor:"pointer",color:"#ff1a1a"}} onClick={()=>dispatch(deleteProd(product)) && setProducts(prods.filter(product => product._id !== prods[index]._id))}/>
               </PriceDetail>
             </Product>)) }
             <Hr />

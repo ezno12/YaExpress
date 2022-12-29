@@ -55,31 +55,29 @@ const Login = () => {
 
 
 
-const handleLogin = async ()=>{
+const handleLogin = async (e)=>{
+  e.preventDefault();
     try{
       const res = await axios.post("http://localhost:5000/api/auth/login", {
         email:email,
         password:password
       })
-      localStorage.setItem('user', JSON.stringify((res).data));
+      localStorage.setItem('userToken', JSON.stringify((res).data));
         axios.get("http://localhost:5000/api/carts/find/"+(res).data._id,
         {
           headers: {
             'Authorization': `Basic ${(res).data.token}` 
           }
         }).then(reponse=>setCart((reponse).data)); 
-      const prods=products.filter(prod=>cartt.products.every(prodd=>prod._id!==prodd.productId))
-      if(cartt){ dispatch(userCart({
-        products:prods.map((prod)=>({
-          ...cartt.products.find((prodd) => prodd.productId === prod._id && prodd),
-          ...prod.quantity,
-        })),
-        wishlist:products.filter(prod=>cartt.wishlist.every(prodd=>prod._id!==prodd.productId)),
-        quantity:prods.length}))
+      
+      if(document.referrer.split("/")[3] === 'cart') {
+        window.location.replace("/cart")
+      } else {
+        window.location.replace("/")
       }
     }
-    catch{
-      console.log("Error")
+    catch(err){
+      console.log(err)
     }
   }
 
@@ -101,7 +99,7 @@ const handleLogin = async ()=>{
 					<i class="login__icon fas fa-lock"></i>
 					<input type="password" class="login__input" placeholder="Password" required onChange={(e)=>setPassword(e.target.value)}></input>
 				</div>
-				<button class="button login__submit">
+				<button class="button login__submit" onClick={handleLogin}>
 					<span class="button__text">Log In Now</span>
 				</button>
         <ForgetPassword><Link>Forget Password?</Link>

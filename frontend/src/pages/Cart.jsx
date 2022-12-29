@@ -200,7 +200,7 @@ const P = styled.div`
 
 const Cart = () => {
   const cart = useSelector(state => state.cart)
-  const user = localStorage.getItem('user');
+  const user = localStorage.getItem('userToken');
   var priceTotal = 0
   const [products, setProducts] = useState(cart.products);
   const [Promo,setPromo]=useState('')
@@ -228,13 +228,13 @@ const Cart = () => {
 
   const handleCheckout=()=>{
     Swal.fire({
-      title: 'Contact us for Help',
-      text:'Connect or Go as a Guest to Confirm your Order',
-      showDenyButton: true,
+      title: 'Order Procedure',
+      text:'You need to login to move on your order',
+      showDenyButton: false,
       showCancelButton: true,
       cancelButtonText: 'Canncel',
       confirmButtonText: 'login',
-      denyButtonText: `Guest`,
+      
     }).then((result) => {
       if (result.isConfirmed) {
         window.location.replace("/login")

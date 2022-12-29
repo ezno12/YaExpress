@@ -27,14 +27,17 @@ const Register = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const handleRegister=async ()=>{
+  const handleRegister=async (e)=>{
+    e.preventDefault();
     if(password===cPassword){try{
       const res = axios.post("http://localhost:5000/api/auth/register", {
         email:email,
         password:password,
         username:username
       });
-      console.log(res);
+      if(res.username){
+        window.location.href="http://localhost:3000/login";
+      }
     }
     catch{
       console.log("Error")

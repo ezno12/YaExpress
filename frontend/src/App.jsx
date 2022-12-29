@@ -7,12 +7,12 @@ import Cart from "./pages/Cart";
 import WishList from "./pages/WishList";
 import Brand from "./pages/Brand";
 import Checkout from "./pages/Checkout";
-import { BrowserRouter , Switch, Route, Redirect } from 'react-router-dom';
+  import { BrowserRouter , Switch, Route, Redirect } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 
 
 const App = () => {
-  const user = localStorage.getItem('user');
+  const user = localStorage.getItem('userToken');
   return (
     <BrowserRouter>
     <Container maxWidth="lg">

@@ -108,7 +108,7 @@ ${mobile({ "font-size":"10px" })}
 `;
 
 const Navbar = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('userToken'));
   const [search,setSearch]=useState("");
   const cart = useSelector(state => state.cart)
   const [products,setProducts]=useState([]);
@@ -214,8 +214,15 @@ const Navbar = () => {
           <Ul id="result">{prod.map((item) =>
               <Link to={`/product/${item._id}`}><Li>{item.title}<br/></Li></Link>
             )}</Ul>
-            {user ? <MenuItem><Link onClick={handleDeconnexion}>Signed Out</Link></MenuItem>:<MenuItem><Link to={'/login'}>Login</Link></MenuItem>}
+            {user ? 
+            
+            <MenuItem><Link onClick={handleDeconnexion}>Signed Out</Link></MenuItem>
+            :
+            <>
+            <MenuItem><Link to={'/login'}>Login</Link></MenuItem>
             <MenuItem><Link to={'/register'}>Sign up</Link></MenuItem>
+            </>
+            } 
           <MenuItem>
           <Link to={'/cart'}>
             <Badge badgeContent={cart.quantity} color={"primary"}>

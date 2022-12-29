@@ -11,10 +11,12 @@ const router = require("express").Router();
 
 router.post("/", verifyToken, async (req, res) => {
   const newOrder = new Order(req.body);
-
+  console.log("new order is", newOrder)
   try {
     const savedOrder = await newOrder.save();
+    console.log("saved order: ", savedOrder)
     res.status(200).json(savedOrder);
+    console.log("successs")
   } catch (err) {
     res.status(500).json(err);
   }

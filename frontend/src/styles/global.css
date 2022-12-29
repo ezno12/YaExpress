@@ -423,7 +423,8 @@ padding: 30px 65px;
 .product-detail-container{
   display: flex;
  gap: 40px;
- margin: 40px;
+ max-width: 70%;
+ margin-inline: auto;
  margin-top: 60px;
  color: black;
 
@@ -432,7 +433,7 @@ padding: 30px 65px;
 .product-detail-image{
    box-shadow: 0 0 0 2px rgb(255 206 0 / 70%);
    background-color: white;
-  width: 400px;
+  
   height: 400px;
   cursor: pointer;
   transition: .3s ease-in-out;
@@ -455,6 +456,7 @@ padding: 30px 65px;
 
 .product-detail-desc {
   position: relative;
+  margin-left: 4rem;
 }
 
 

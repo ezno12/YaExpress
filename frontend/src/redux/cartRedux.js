@@ -78,6 +78,13 @@ const cartSlice = createSlice({
       );
       state.wishlist.splice(index, 1);
     },
+    checkOut: (state) => {
+      state.products = [];
+      state.quantity = 0;
+      state.totalPrice = 0;
+      state.promoPrice = 0;
+    },
+    
   },
 });
 export const {
@@ -88,5 +95,6 @@ export const {
   addProd,
   deleteProd,
   userCart,
+  checkOut
 } = cartSlice.actions;
 export default cartSlice.reducer;

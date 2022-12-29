@@ -54,6 +54,7 @@ router.get("/find/:userId", verifyToken, async (req, res) => {
     res.status(200).json(cart);
     console.log(res);
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 });

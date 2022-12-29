@@ -170,6 +170,14 @@ const handleClick= () =>{
     addProduct({...product, quantity, color, size }))
 }
 
+
+const handleBuy= () =>{
+  dispatch( 
+    addProduct({...product, quantity, color, size }))
+  window.location.assign('/checkout')
+}
+
+
 useEffect(() => {
   const getProducts = async () =>{
     try{
@@ -240,7 +248,7 @@ return (
             </p>
           </div>
           <div className="buttons">
-            <button type="button" className="buy-now">Buy Now</button>
+            <button type="button" className="buy-now" onClick={handleBuy}>Buy Now</button>
             <button type="button" className="add-to-cart" onClick={handleClick}>Add to Cart</button>
           </div>
         </div>

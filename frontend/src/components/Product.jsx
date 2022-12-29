@@ -161,6 +161,7 @@ const Product = ({ item }) => {
   const handleClick= () =>{
     dispatch( 
       addProduct({...item, quantity, color, size }))
+    window.location.assign('/checkout')
   }
   const handleWish= () =>{
     dispatch( 
@@ -184,7 +185,7 @@ const Product = ({ item }) => {
       <ContentBox>
       <Link to={`/product/${item._id}`}><ProdTitle>{item.title}</ProdTitle></Link>
         <Price>{item.price}$</Price>
-        <Buy onClick={handleClick}>Add to Cart</Buy> 
+        <Buy onClick={handleClick}>Buy Now</Buy> 
       </ContentBox>
     </Card>
     </Container>

@@ -9,7 +9,9 @@ import Newsletter from "../components/Newsletter";
 import {  useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
+import { useDispatch } from "react-redux";
+import { checkOut } from "../redux/cartRedux";
+import { message } from 'antd';
 
 const Container = styled.div`
 `;
@@ -78,7 +80,7 @@ const Input = styled.input`
   ${mobile({ padding: "8px" })}
 `;
 
-const Button = styled.button`
+const ButtonOrder = styled.button`
 margin-top: 1rem;
 margin-bottom: 4rem;
 width: 40%;
@@ -217,9 +219,15 @@ const Div = styled.div`
   position:relative;
 `;
 
+
+
+
 const Checkout = () => {
+  const dispatch = useDispatch();
+  const [messageApi, contextHolder] = message.useMessage();
   const cart = useSelector(state => state.cart)
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('userToken'));
+  console.log("user is: ",user._id)
   const [order,setOrder]=useState({
     userId:user? user._id:"",
     products:cart.products,
@@ -232,11 +240,37 @@ const Checkout = () => {
     },
     phoneNumber: 0,
   })
+
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Order Confirmed',
+    });
+  };
   
   const handleOrder= () =>{
-    try{
-      const res = axios.post("http://localhost:5000/api/orders", order);
+      try{
+      const res = axios.post("http://localhost:5000/api/orders", 
+      {
+            userId: user? user._id : "",
+            products: {
+                productId: order.products._id,
+                quantity: order.products.quantity
+            },
+            ville: order.ville,
+            amount: order.amount,
+            address: JSON.stringify(order.address),
+            phoneNumber: order.phoneNumber,
+            status: "active"
+          }, {
+        headers: {
+          'Authorization': `Basic ${user.token}` 
+        }
+      })
+      dispatch(checkOut())
       console.log(res);
+      success()
+      setTimeout(function(){ window.location.href= '/';}, 1600);
     }
     catch{
       console.log("Error")
@@ -251,6 +285,7 @@ const Checkout = () => {
     <Container>
       <Announcement />
       <Navbar />
+      {contextHolder}
       <br /> 
       <Menu />  
 
@@ -271,7 +306,7 @@ const Checkout = () => {
           <Subtitle>Contact Information</Subtitle>
           <Input type="email" placeholder="Email" />
           <Input type="tel" placeholder="Phone Number" required onChange={(e)=>setOrder({...order, phoneNumber:e.target.value})}/>
-          <Button onClick={handleOrder}>Confirm Order</Button>
+          <ButtonOrder onClick={handleOrder}>Confirm Order</ButtonOrder>
         </Form>
       </Wrapper>
       </Order>:<Divv>No Order yet...</Divv>}
